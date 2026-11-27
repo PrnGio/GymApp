@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TemaApp {
   // Colore principale dell'app (verde petrolio sportivo)
-  static const Color _coloreSeme = Color(0xFF0F766E);
+  static const Color _coloreSeme = Color.fromARGB(255, 50, 37, 192);
 
   static ThemeData get temaChiaro {
     final colorScheme = ColorScheme.fromSeed(
