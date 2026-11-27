@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
+import '../modelli/esercizio.dart';
 
 class SchermataEsercizi extends StatelessWidget {
   const SchermataEsercizi({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    final esercizi = Esercizio.eserciziPredefiniti;
+
+    return ListView.builder(
       padding: const EdgeInsets.all(16),
-      children: [
-        Card(
+      itemCount: esercizi.length,
+      itemBuilder: (context, index) {
+        final esercizio = esercizi[index];
+        return Card(
           child: ListTile(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
-              vertical: 8,
+              vertical: 6,
             ),
             leading: const CircleAvatar(
               child: Icon(Icons.fitness_center),
             ),
-            title: const Text(
-              'Panca Piana Bilanciere',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Text(
+              esercizio.nome,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: const Text('Categoria: Busto'),
+            subtitle: Text('Categoria: ${esercizio.categoria}'),
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }
