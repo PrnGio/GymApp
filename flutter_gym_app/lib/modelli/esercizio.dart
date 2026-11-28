@@ -14,7 +14,7 @@ class Esercizio extends EntitaSincronizzabile {
   });
 
   static const List<String> categorieDisponibili = [
-    'Busto',
+    'Petto',
     'Schiena',
     'Gambe',
     'Spalle',
