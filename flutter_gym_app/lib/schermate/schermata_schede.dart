@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../modelli/scheda_allenamento.dart';
 import '../stati/allenamento_provider.dart';
 import 'schermata_modifica_scheda.dart';
+import 'schermata_sessione_attiva.dart';
 
 class SchermataSchede extends StatelessWidget {
   const SchermataSchede({super.key});
@@ -150,12 +151,14 @@ class SchermataSchede extends StatelessWidget {
                           alignment: Alignment.centerRight,
                           child: FilledButton.tonalIcon(
                             onPressed: () async {
-                              await provider.avviaAllenamentoDaScheda(scheda);
+                              final nuovoRegistro = await provider
+                                  .avviaAllenamentoDaScheda(scheda);
                               if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Sessione "${scheda.nome}" avviata! Vai sul tab Registro per compilarla.',
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => SchermataSessioneAttiva(
+                                      registroId: nuovoRegistro.id,
                                     ),
                                   ),
                                 );
