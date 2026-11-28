@@ -59,9 +59,9 @@ class Esercizio extends EntitaSincronizzabile {
 
   /// Catalogo base precaricato al primo avvio
   static List<Esercizio> get eserciziPredefiniti => const [
-        Esercizio(id: 'def_panca_piana', ultimaModifica: 1, sincronizzato: true, nome: 'Panca Piana Bilanciere', categoria: 'Busto'),
-        Esercizio(id: 'def_spinte_manubri', ultimaModifica: 1, sincronizzato: true, nome: 'Spinte Manubri Panca Inclinata', categoria: 'Busto'),
-        Esercizio(id: 'def_croci_cavi', ultimaModifica: 1, sincronizzato: true, nome: 'Croci ai Cavi', categoria: 'Busto'),
+        Esercizio(id: 'def_panca_piana', ultimaModifica: 1, sincronizzato: true, nome: 'Panca Piana Bilanciere', categoria: 'Petto'),
+        Esercizio(id: 'def_spinte_manubri', ultimaModifica: 1, sincronizzato: true, nome: 'Spinte Manubri Panca Inclinata', categoria: 'Petto'),
+        Esercizio(id: 'def_croci_cavi', ultimaModifica: 1, sincronizzato: true, nome: 'Croci ai Cavi', categoria: 'Petto'),
         Esercizio(id: 'def_lat_machine', ultimaModifica: 1, sincronizzato: true, nome: 'Lat Machine Avanti', categoria: 'Schiena'),
         Esercizio(id: 'def_rematore', ultimaModifica: 1, sincronizzato: true, nome: 'Rematore con Manubrio', categoria: 'Schiena'),
         Esercizio(id: 'def_pulley', ultimaModifica: 1, sincronizzato: true, nome: 'Pulley Basso', categoria: 'Schiena'),

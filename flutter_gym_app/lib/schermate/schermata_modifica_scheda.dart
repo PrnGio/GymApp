@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../modelli/esercizio.dart';
 import '../modelli/scheda_allenamento.dart';
 import '../stati/allenamento_provider.dart';
+import '../widget/dialog_scelta_esercizio.dart';
 
 class SchermataModificaScheda extends StatefulWidget {
   final SchedaAllenamento? schedaEsistente;
@@ -72,30 +73,29 @@ class _SchermataModificaSchedaState extends State<SchermataModificaScheda> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    DropdownButtonFormField<String>(
-                      initialValue: esercizioScelto.id,
-                      isExpanded: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Esercizio',
-                      ),
-                      items: eserciziDisponibili.map((es) {
-                        return DropdownMenuItem(
-                          value: es.id,
+                      InkWell(
+                        borderRadius: BorderRadius.circular(12),
+                        onTap: () async {
+                          final scelto = await DialogSceltaEsercizio.mostra(
+                            context,
+                            esercizi: eserciziDisponibili,
+                            esercizioSelezionatoId: esercizioScelto.id,
+                          );
+                          if (scelto != null) {
+                            setStateDialog(() => esercizioScelto = scelto);
+                          }
+                        },
+                        child: InputDecorator(
+                          decoration: const InputDecoration(
+                            labelText: 'Esercizio',
+                            suffixIcon: Icon(Icons.arrow_drop_down),
+                          ),
                           child: Text(
-                            '${es.nome} (${es.categoria})',
+                            '${esercizioScelto.nome} (${esercizioScelto.categoria})',
                             overflow: TextOverflow.ellipsis,
                           ),
-                        );
-                      }).toList(),
-                      onChanged: (nuovoId) {
-                        if (nuovoId == null) return;
-                        setStateDialog(() {
-                          esercizioScelto = eserciziDisponibili.firstWhere(
-                            (e) => e.id == nuovoId,
-                          );
-                        });
-                      },
-                    ),
+                        ),
+                      ),
                     const SizedBox(height: 12),
                     Row(
                       children: [

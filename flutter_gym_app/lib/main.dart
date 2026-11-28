@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'tema/tema_app.dart';
@@ -21,6 +22,13 @@ class GymApp extends StatelessWidget {
       child: MaterialApp(
         title: 'GymApp',
         debugShowCheckedModeBanner: false,
+        scrollBehavior: const MaterialScrollBehavior().copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.trackpad,
+          },
+        ),
         theme: TemaApp.temaChiaro,
         darkTheme: TemaApp.temaScuro,
         themeMode: ThemeMode.system,

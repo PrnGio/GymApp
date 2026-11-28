@@ -43,9 +43,15 @@ class AllenamentoProvider extends ChangeNotifier {
     _inCaricamento = true;
     notifyListeners();
 
+//risolve problemino in memoria modifica da busto a petto
     _esercizi = await _memoria.caricaEsercizi();
     if (_esercizi.isEmpty) {
       _esercizi = List<Esercizio>.from(Esercizio.eserciziPredefiniti);
+      await _memoria.salvaEsercizi(_esercizi);
+    } else if (_esercizi.any((e) => e.categoria == 'Busto')) {
+      _esercizi = _esercizi
+          .map((e) => e.categoria == 'Busto' ? e.copyWith(categoria: 'Petto') : e)
+          .toList();
       await _memoria.salvaEsercizi(_esercizi);
     }
 

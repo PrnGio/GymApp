@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../modelli/esercizio.dart';
 import '../modelli/registro_allenamento.dart';
 import '../stati/allenamento_provider.dart';
+import '../widget/dialog_scelta_esercizio.dart';
 
 class SchermataSessioneAttiva extends StatefulWidget {
   final String registroId;
@@ -66,29 +67,28 @@ class _SchermataSessioneAttivaState extends State<SchermataSessioneAttiva> {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  DropdownButtonFormField<String>(
-                    initialValue: esercizioScelto.id,
-                    isExpanded: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Esercizio',
-                    ),
-                    items: eserciziDisponibili.map((es) {
-                      return DropdownMenuItem(
-                        value: es.id,
-                        child: Text(
-                          '${es.nome} (${es.categoria})',
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    onTap: () async {
+                      final scelto = await DialogSceltaEsercizio.mostra(
+                        context,
+                        esercizi: eserciziDisponibili,
+                        esercizioSelezionatoId: esercizioScelto.id,
                       );
-                    }).toList(),
-                    onChanged: (nuovoId) {
-                      if (nuovoId == null) return;
-                      setStateDialog(() {
-                        esercizioScelto = eserciziDisponibili.firstWhere(
-                          (e) => e.id == nuovoId,
-                        );
-                      });
+                      if (scelto != null) {
+                        setStateDialog(() => esercizioScelto = scelto);
+                      }
                     },
+                    child: InputDecorator(
+                      decoration: const InputDecoration(
+                        labelText: 'Esercizio',
+                        suffixIcon: Icon(Icons.arrow_drop_down),
+                      ),
+                      child: Text(
+                        '${esercizioScelto.nome} (${esercizioScelto.categoria})',
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   TextField(
